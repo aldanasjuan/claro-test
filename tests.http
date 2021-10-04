@@ -1,0 +1,23 @@
+GET http://localhost:8855
+
+###
+POST http://localhost:8855/register
+Content-Type: application/json
+
+{
+    "firstName": "Juan",
+    "lastName": "Aldana",
+    "location": "GT",
+    "username": "aldanasjuan",
+    "password": "password123",
+    "role": "dev"
+}
+###
+
+POST http://localhost:8855/login
+Content-Type: application/json
+
+{
+    "username": "aldanasjuan",
+    "password": "password123"
+}

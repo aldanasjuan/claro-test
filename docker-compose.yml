@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  db:
+    container_name: db
+    image: postgres
+    #tty: true
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: IacmN71TphvRd7EbfvutNw
+      POSTGRES_DB: test
+  backend:
+    build: "."
+    ports: 
+      - "8855:8855"
+    environment: 
+      DB : "host=db port=5432 user=postgres password=IacmN71TphvRd7EbfvutNw dbname=test sslmode=disable"
+      PORT: "8855"
