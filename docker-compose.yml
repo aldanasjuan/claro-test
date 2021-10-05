@@ -14,6 +14,7 @@ services:
     build: "."
     ports: 
       - "8855:8855"
+      - "80:80"
     environment: 
       DB : "host=db port=5432 user=postgres password=IacmN71TphvRd7EbfvutNw dbname=test sslmode=disable"
       PORT: "8855"

@@ -7,6 +7,7 @@
 	let number = 0
 	let error = ""
 	let result = ""
+	let loading = false
 	async function logout(){
 		let options = {
             headers: {
@@ -21,11 +22,15 @@
         }
 	}
 	async function roman(){
+		
+		error = ""
+		result = ""
 		number = parseInt(number)
 		if(number < 1){
 			error = "No. debe ser mayor a 0"
 			return
 		}
+		loading = true
 		let options = {
 			method: "POST",
             headers: {
@@ -36,11 +41,11 @@
 		let res = await fetch(url+"/roman", options)
         if(res.status === 200){
 			result = await res.text()
+			
         }else{
 			error = await res.text()
         }
-		error = ""
-		result = ""
+		loading = false
 	}
 </script>
 
@@ -55,7 +60,7 @@
 	<label>Número a Romano
 		<input type="number" bind:value={number}/>
 	</label>
-	<button on:click={roman}>Convertir</button>
+	<button disabled={loading} on:click={roman}>Convertir</button>
 	<p style="color:red">
 		{error}
 	</p>

@@ -49,19 +49,18 @@ func main() {
 	if err != nil {
 		Log(err)
 	}
-
+	front := fiber.New()
+	front.Static("/", "./static")
+	go front.Listen(":80")
 	app := fiber.New()
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
 	}))
-	app.Get("/", Frontend)
-	app.Static("/", "./static")
 	app.Post("/login", Login(db))
 	app.Post("/register", Register(db))
 	app.Post("/verify", CheckNIT(db))
 	app.Get("/logout", Logout(db))
 	app.Post("/roman", GetRoman(db))
-
 	app.Listen(":" + os.Getenv("PORT"))
 
 }

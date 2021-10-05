@@ -135,6 +135,10 @@ func GetRoman(db *pgxpool.Pool) fiber.Handler {
 		req := struct {
 			Number int `json:"number,omitempty"`
 		}{}
+		err := ctx.BodyParser(&req)
+		if err != nil {
+			return fiber.ErrBadRequest
+		}
 		res := IntToRoman(req.Number)
 		return ctx.SendString(res)
 	}
